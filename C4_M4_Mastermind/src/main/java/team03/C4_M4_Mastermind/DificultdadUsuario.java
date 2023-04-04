@@ -129,7 +129,7 @@ public class DificultdadUsuario extends JFrame {
 				}
 			}
 			
-			vista vista = new vista(intentos, colores);
+			new vista(intentos, colores);
 			setVisible(false);
 		}
 	};
@@ -138,7 +138,7 @@ public class DificultdadUsuario extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			intentos = 10;
 			colores = 4;
-			vista vista = new vista(intentos, colores);
+			new vista(intentos, colores);
 			setVisible(false);
 		}
 	};

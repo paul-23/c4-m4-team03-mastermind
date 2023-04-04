@@ -41,6 +41,7 @@ public class vista extends JFrame {
 	    Color array[] = new Color[colores];
 	    Color[] arrCol = {Color.RED,Color.pink,Color.yellow,Color.green,Color.black,Color.gray,Color.blue,Color.orange,Color.magenta,Color.DARK_GRAY};
 	  
+	    setVisible(true);
 	    
 		int i = 0;
 		if( i <= 1) {
