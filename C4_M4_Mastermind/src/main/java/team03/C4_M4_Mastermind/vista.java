@@ -55,34 +55,45 @@ public class vista extends JFrame {
 		JButton btnNewButton_2_1 = new JButton("");
 		btnNewButton_2_1.setBounds(335, 25, 89, 23);
 		contentPane.add(btnNewButton_2_1);
-		Color[] arrCol = {Color.RED,Color.pink,Color.yellow,Color.green,Color.white,Color.black,Color.gray,Color.blue,Color.orange,Color.magenta,Color.DARK_GRAY};
-
+		int colores = 4;
+	    Color array[] = new Color[colores];
+	    Color[] arrCol = {Color.RED,Color.pink,Color.yellow,Color.green,Color.black,Color.gray,Color.blue,Color.orange,Color.magenta,Color.DARK_GRAY};
+	  
+	    
 		int i = 0;
 		if( i <= 1) {
-		int randomNumber = (int) Math.round(Math.random()*10);
+		int randomNumber = (int) Math.round(Math.random()*colores);
 			Color colorselecc = arrCol[randomNumber];
 			btnNewButton.setBackground(colorselecc);
+	        array[i] = colorselecc;
+
 			i++;
 		}
 		 i = 0;
 		if( i <= 1) {
-			int randomNumber = (int) Math.round(Math.random()*10);
+			int randomNumber = (int) Math.round(Math.random()*colores);
 				Color colorselecc = arrCol[randomNumber];
 				btnNewButton_1.setBackground(colorselecc);
+		        array[i] = colorselecc;
+
 				i++;
 			}
 		 i = 0;
 		if( i <= 1) {
-			int randomNumber = (int) Math.round(Math.random()*10);
+			int randomNumber = (int) Math.round(Math.random()*colores);
 				Color colorselecc = arrCol[randomNumber];
 				btnNewButton_2.setBackground(colorselecc);
+		        array[i] = colorselecc;
+
 				i++;
 			}
 		 i = 0;
 		if( i <= 1) {
-			int randomNumber = (int) Math.round(Math.random()*10);
+			int randomNumber = (int) Math.round(Math.random()*colores);
 				Color colorselecc = arrCol[randomNumber];
 				btnNewButton_2_1.setBackground(colorselecc);
+		        array[i] = colorselecc;
+
 				i++;
 			}
 }	
