@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 public class DificultdadUsuario extends JFrame {
 
@@ -28,6 +29,7 @@ public class DificultdadUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public DificultdadUsuario() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DificultdadUsuario.class.getResource("/imagenes/icono.png")));
 		setTitle("Seleccionar nivel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 415, 468);

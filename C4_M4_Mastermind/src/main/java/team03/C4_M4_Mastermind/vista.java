@@ -2,7 +2,6 @@ package team03.C4_M4_Mastermind;
 
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,12 +9,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
@@ -25,6 +22,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
+import java.awt.Toolkit;
 
 public class vista extends JFrame {
 
@@ -37,6 +35,8 @@ public class vista extends JFrame {
 	private JMenuItem mntmAyuda, mntmInformacion;
 
 	public vista(int intentos, int colores) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(vista.class.getResource("/imagenes/icono.png")));
+		setTitle("MasterMind"); // Ponemos el título de la ventana de la aplicación
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1040, 772);
 		contentPane = new JPanel();
@@ -124,7 +124,7 @@ public class vista extends JFrame {
 
 		mntmAyuda = new JMenuItem("Ayuda");
 		mnAbout.add(mntmAyuda);
-		
+
 		mntmAyuda.addActionListener(mostrarAyuda);
 
 		mntmInformacion = new JMenuItem("Información");
@@ -143,8 +143,7 @@ public class vista extends JFrame {
 		JButton[] btnSelecionados = { btn1, btn2, btn3, btn4 };
 		ArrayList<Integer> numbers = new ArrayList<Integer>();
 
-		// Generamos los colores según la dificultad escojida, con colores unicos del
-		// array
+		// Generamos los colores según la dificultad escojida, con colores unicos del array
 		int num = 0;
 		while (numbers.size() < colores) {
 			int randomNumber = (int) Math.round(Math.random() * 9);
@@ -157,8 +156,7 @@ public class vista extends JFrame {
 			}
 		}
 
-		// Generaamos los colores escojidos por le ordenador como solucion, puede
-		// contener dos valores iguales
+		// Generaamos los colores escojidos por le ordenador como solucion, puede contener dos valores iguales
 		for (int i = 0; i < arraySolucion.length; i++) {
 			int randomNumber = (int) Math.round(Math.random() * (arraySolucion.length - 1));
 			Color colorSelec = arrayDificultad[randomNumber];
@@ -180,8 +178,7 @@ public class vista extends JFrame {
 		}
 	};
 
-	// Cremos un metodo que no muestra un mensaje dentro de una alerta al pulsar el
-	// botón
+	// Cremos un metodo que no muestra un mensaje dentro de una alerta al pulsar el botón
 	ActionListener mostrarInformacion = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			JLabel label = new JLabel("<html><h1>MASTER MIND</h1>"
