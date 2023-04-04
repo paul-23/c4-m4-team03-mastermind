@@ -36,7 +36,8 @@ public class vista extends JFrame {
 		JButton btnNewButton_2_1 = new JButton("");
 		btnNewButton_2_1.setBounds(335, 25, 89, 23);
 		contentPane.add(btnNewButton_2_1);
-		int colores = 4;
+		
+		colores = 4;
 	    Color array[] = new Color[colores];
 	    Color[] arrCol = {Color.RED,Color.pink,Color.yellow,Color.green,Color.black,Color.gray,Color.blue,Color.orange,Color.magenta,Color.DARK_GRAY};
 	  
