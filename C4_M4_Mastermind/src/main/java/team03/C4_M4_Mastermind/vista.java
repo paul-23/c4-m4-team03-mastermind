@@ -330,10 +330,10 @@ public class vista extends JFrame {
 		bot4.addActionListener(cambiar);
 //		setContentPane(bot4);
 
-		bot1.setBackground(arrCol[0]);
-		bot2.setBackground(arrCol[2]);
-		bot3.setBackground(arrCol[0]);
-		bot4.setBackground(arrCol[0]);
+		bot1.setBackground(Color.white);
+		bot2.setBackground(Color.white);
+		bot3.setBackground(Color.white);
+		bot4.setBackground(Color.white);
 		botones.add(bot1);
 		botones.add(bot2);
 		botones.add(bot3);
