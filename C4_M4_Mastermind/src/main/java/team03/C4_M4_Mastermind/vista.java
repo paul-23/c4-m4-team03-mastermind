@@ -25,7 +25,7 @@ import javax.swing.JMenu;
 import java.awt.Toolkit;
 
 public class vista extends JFrame {
-
+//Variables globales (las usamos en todas las partes del proyecto)
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnColor1, btnColor2, btnColor3, btnColor4, btnColor5, btnColor6;
@@ -35,13 +35,13 @@ public class vista extends JFrame {
 	private JMenuItem mntmAyuda, mntmInformacion;
 
 	public vista(int intentos, int colores) {
+		//Creación de la parte visual (Paneles, Botones y menus)
 		setIconImage(Toolkit.getDefaultToolkit().getImage(vista.class.getResource("/imagenes/icono.png")));
 		setTitle("MasterMind"); // Ponemos el título de la ventana de la aplicación
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1040, 772);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -134,7 +134,7 @@ public class vista extends JFrame {
 		mntmInformacion.addActionListener(mostrarInformacion);
 
 		setVisible(true);
-
+//Creamos arrays de colores y botones (para despues correlacionarlos unos con otros)
 		Color arrayDificultad[] = new Color[colores];
 		Color arraySolucion[] = new Color[4];
 		Color[] arrCol = { Color.RED, Color.pink, Color.yellow, Color.green, Color.black, Color.gray, Color.blue,
@@ -156,7 +156,7 @@ public class vista extends JFrame {
 			}
 		}
 
-		// Generaamos los colores escojidos por le ordenador como solucion, puede contener dos valores iguales
+		// Generaamos los colores escojidos por el ordenador como solucion, puede contener dos valores iguales
 		for (int i = 0; i < arraySolucion.length; i++) {
 			int randomNumber = (int) Math.round(Math.random() * (arraySolucion.length - 1));
 			Color colorSelec = arrayDificultad[randomNumber];
@@ -178,7 +178,7 @@ public class vista extends JFrame {
 		}
 	};
 
-	// Cremos un metodo que no muestra un mensaje dentro de una alerta al pulsar el botón
+	// Mostrar informacion sobre el proyecto y sobre el juego 
 	ActionListener mostrarInformacion = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			JLabel label = new JLabel("<html><h1>MASTER MIND</h1>"
