@@ -34,7 +34,6 @@ public class vista extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane1;
-	private JPanel contentPane;
 	private JButton btnColor1, btnColor2, btnColor3, btnColor4, btnColor5, btnColor6;
 	private JButton btn1e, btn2e, btn3e, btn4e;
 	private JCheckBoxMenuItem chckbxmntmMostrarSolucion;
@@ -42,10 +41,12 @@ public class vista extends JFrame {
 	private JMenuItem mntmAyuda, mntmInformacion;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
 	private JButton btnNewButton_3;
+	private JButton btnNewButton_2;
 	private JButton comp;
 	private JPanel panel = new JPanel();
+
+	JButton[] btnSelecionados = new JButton[4];
 
 	private Color[] arrayDificultad;
 	private Color[] arraySolucion;
@@ -53,6 +54,8 @@ public class vista extends JFrame {
 			Color.orange, Color.magenta, Color.cyan };
 
 	final ArrayList<JButton> botones = new ArrayList<>();
+
+	private int numIntentos = 0;
 
 	final ActionListener cambiar = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -180,66 +183,142 @@ public class vista extends JFrame {
 		mntmInformacion = new JMenuItem("Información");
 		mnAbout.add(mntmInformacion);
 
-		
-		panel.setBounds(30, 58, 662, 403);
+		btnSelecionados[0] = btn1e;
+		btnSelecionados[1] = btn2e;
+		btnSelecionados[2] = btn3e;
+		btnSelecionados[3] = btn4e;
+
+		panel.setBounds(30, 58, 662, 603);
 		contentPane1.add(panel);
 		panel.setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("50dlu"), FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
-						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+				new ColumnSpec[] { ColumnSpec.decode("25dlu"), FormSpecs.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("25dlu"), FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("25dlu"),
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("25dlu"), FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, ColumnSpec.decode("50dlu"), FormSpecs.RELATED_GAP_COLSPEC,
 						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
-						ColumnSpec.decode("50dlu"), },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, },
+				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("25dlu"), FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("25dlu"), FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("25dlu"),
+						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("25dlu"), FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
+		btnNewButton = new JButton();
+		panel.add(btnNewButton, "1, 4, 2, 2");
+		btnNewButton.setBackground(Color.white);
+
+		btnNewButton_1 = new JButton();
+		panel.add(btnNewButton_1, "3, 4, 2, 2");
+		btnNewButton_1.setBackground(Color.white);
+
+		btnNewButton_2 = new JButton();
+		panel.add(btnNewButton_2, "5, 4, 2, 2");
+		btnNewButton_2.setBackground(Color.white);
+		botones.add(btnNewButton);
+
+		btnNewButton_2.addActionListener(cambiar);
+		btnColor6.setVisible(false);
+
+		botones.add(btnNewButton_1);
+		botones.add(btnNewButton_2);
+
+		btnNewButton_3 = new JButton();
+		panel.add(btnNewButton_3, "7, 4, 2, 2");
+		btnNewButton_3.setBackground(Color.white);
+		botones.add(btnNewButton_3);
 
 		comp = new JButton("Comprovar");
-		panel.add(comp, "1, 2");
+		comp.setBounds(717, 273, 252, 43);
+		contentPane1.add(comp);
 
 		comp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// System.out.println(botones.get(botones.size()-4).getBackground());
-				if (botones.get(botones.size() - 4).getBackground().equals(arraySolucion[0])
-						&& botones.get(botones.size() - 3).getBackground().equals(arraySolucion[1])
-						&& botones.get(botones.size() - 2).getBackground().equals(arraySolucion[2])
-						&& botones.get(botones.size() - 1).getBackground().equals(arraySolucion[3])) {
-					System.out.println("Has ganado!");
+				if (intentos > numIntentos) {
+					numIntentos++;
+
+					if (botones.get(botones.size() - 4).getBackground().equals(arraySolucion[0])
+							&& botones.get(botones.size() - 3).getBackground().equals(arraySolucion[1])
+							&& botones.get(botones.size() - 2).getBackground().equals(arraySolucion[2])
+							&& botones.get(botones.size() - 1).getBackground().equals(arraySolucion[3])) {
+						JLabel label = new JLabel("<html><h1>¡Felicidades, has ganado!</h1></html>");
+						label.setFont(new Font("Arial", Font.BOLD, 20)); // Cambiamos la fuente y tamaño del texto
+						JOptionPane.showMessageDialog(contentPane1, label);
+					} else {
+
+						int blanco = 0;
+
+						int negro = 0;
+
+						for (int i = 0; i < botones.size(); i++) {
+							boolean neg = true;
+							for (int j = 0; j < btnSelecionados.length; j++) {
+								if (neg && botones.get(i).getBackground().equals(btnSelecionados[i].getBackground())) {
+									negro++;
+									neg = false;
+
+								} else if (botones.get(i).getBackground().equals(btnSelecionados[j].getBackground())) {
+
+									blanco++;
+
+								}
+							}
+
+						}
+						int[] negras = new int[4]; // Array para almacenar los colores correctos y en su posición
+						int[] blancas = new int[4]; // Array para almacenar los colores correctos pero en una posición
+													// incorrecta
+						int numNegras = 0; // Contador para el número de colores correctos y en su posición
+						int numBlancas = 0; // Contador para el número de colores correctos pero en una posición
+											// incorrecta
+
+						// Comprobando las negras
+						for (int i = 0; i < 4; i++) {
+							if (botones.get(i).getBackground().equals(btnSelecionados[i].getBackground())) {
+								negras[numNegras] = 1; // Añadimos un "1" al array de negras
+								numNegras++; // Incrementamos el contador de negras
+							}
+						}
+
+						// Comprobando las blancas
+						for (int i = 0; i < 4; i++) {
+							if (!botones.get(i).getBackground().equals(btnSelecionados[i].getBackground())) { // Si el color no está en su posición correcta
+								for (int j = 0; j < 4; j++) { // Buscamos si está en otra posición
+									if (botones.get(i).getBackground().equals(btnSelecionados[j].getBackground()) && negras[j] != 1 && blancas[j] != 1) {
+										blancas[numBlancas] = 1; // Añadimos un "1" al array de blancas
+										numBlancas++; // Incrementamos el contador de blancas
+										break; // Salimos del bucle interior para no contar dos veces un mismo color
+									}
+								}
+							}
+						}
+
+						// Creando los PictureBox con color negro para las negras
+
+						System.out.println(blanco + "" + negro);
+
+						crear(botones, arrayDificultad);
+					}
+				} else {
+					System.out.println("Intentos maximos usados");
 				}
-				crear(botones, arrayDificultad);
 			}
 		});
+		btnNewButton_3.addActionListener(cambiar);
 
-		btnNewButton = new JButton("New button");
-		panel.add(btnNewButton, "1, 4");
-		btnNewButton.setBackground(Color.white);
-
-		btnNewButton_1 = new JButton("New button");
-		panel.add(btnNewButton_1, "3, 4");
-		btnNewButton_1.setBackground(Color.white);
-
-		btnNewButton_3 = new JButton("New button");
-		panel.add(btnNewButton_3, "7, 4");
-		btnNewButton_3.setBackground(Color.white);
-
-		btnNewButton_2 = new JButton("New button");
-		panel.add(btnNewButton_2, "9, 4");
-		btnNewButton_2.setBackground(Color.white);
-		btnColor6.setVisible(false);
-
-		botones.add(btnNewButton);
-		botones.add(btnNewButton_1);
-		botones.add(btnNewButton_3);
-		botones.add(btnNewButton_2);
 		btnNewButton.addActionListener(cambiar);
 		btnNewButton_1.addActionListener(cambiar);
-		btnNewButton_3.addActionListener(cambiar);
-		btnNewButton_2.addActionListener(cambiar);
 
 		mntmInformacion.addActionListener(mostrarInformacion);
 
 		setVisible(true);
 
 		JButton[] btnColoresDisponibles = { btnColor1, btnColor2, btnColor3, btnColor4, btnColor5, btnColor6 };
-		JButton[] btnSelecionados = { btn1e, btn2e, btn3e, btn4e };
 		ArrayList<Integer> numbers = new ArrayList<Integer>();
 
 		// Generamos los colores según la dificultad escojida, con colores unicos del
@@ -303,6 +382,7 @@ public class vista extends JFrame {
 		}
 	};
 
+	@SuppressWarnings("deprecation")
 	private void crear(ArrayList<JButton> botones, Color[] arrCol) {
 		// TODO Auto-generated method stub
 		if (!botones.isEmpty()) {
@@ -311,9 +391,8 @@ public class vista extends JFrame {
 			botones.get(botones.size() - 2).setEnabled(false);
 			botones.get(botones.size() - 1).setEnabled(false);
 		}
-//		System.out.println(botones.size());
 
-		JButton bot1 = new JButton("a");
+		JButton bot1 = new JButton();
 		panel.add(bot1, "1, " + (4 + (botones.size() / 2)) + ", center, center");
 		bot1.addActionListener(cambiar);
 
@@ -322,11 +401,11 @@ public class vista extends JFrame {
 		bot2.addActionListener(cambiar);
 
 		JButton bot3 = new JButton();
-		panel.add(bot3, "7," + (4 + (botones.size() / 2)) + ", center, center");
+		panel.add(bot3, "5," + (4 + (botones.size() / 2)) + ", center, center");
 		bot3.addActionListener(cambiar);
 
 		JButton bot4 = new JButton();
-		panel.add(bot4, "9," + (4 + (botones.size() / 2)) + ", center, center");
+		panel.add(bot4, "7," + (4 + (botones.size() / 2)) + ", center, center");
 		bot4.addActionListener(cambiar);
 //		setContentPane(bot4);
 
@@ -338,6 +417,12 @@ public class vista extends JFrame {
 		botones.add(bot2);
 		botones.add(bot3);
 		botones.add(bot4);
+		// bot1.setBounds(intx, inty, width, height);
+		bot1.setBounds(10, 50 + (botones.size() * 10), 30, 30);
+		bot2.setBounds(40, 50 + (botones.size() * 10), 30, 30);
+		bot3.setBounds(70, 50 + (botones.size() * 10), 30, 30);
+		bot4.setBounds(100, 50 + (botones.size() * 10), 30, 30);
+//		System.out.println(botones.size());
 
 	}
 
