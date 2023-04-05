@@ -5,15 +5,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import java.awt.Toolkit;
+import java.awt.Color;
 
 public class DificultdadUsuario extends JFrame {
 
@@ -42,31 +42,34 @@ public class DificultdadUsuario extends JFrame {
 		JLabel lblNewLabel = new JLabel("Selecciona la dificultad");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(75, 28, 251, 59);
+		lblNewLabel.setBounds(75, 95, 251, 59);
 		contentPane.add(lblNewLabel);
 
 		// --------------------------- RADIO BUTTONS ---------------------------
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(102, 123, 197, 108);
+		panel_1.setBounds(57, 159, 286, 113);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
 		rdbtnPrincipiante = new JRadioButton("Principiante");
+		rdbtnPrincipiante.setForeground(new Color(0, 102, 0));
 		rdbtnPrincipiante.setSelected(true);
-		rdbtnPrincipiante.setBounds(25, 0, 147, 34);
+		rdbtnPrincipiante.setBounds(48, 0, 189, 34);
 		panel_1.add(rdbtnPrincipiante);
-		rdbtnPrincipiante.setFont(new Font("Arial", Font.PLAIN, 20));
+		rdbtnPrincipiante.setFont(new Font("Arial", Font.BOLD, 27));
 
 		rdbtnMedio = new JRadioButton("Medio");
-		rdbtnMedio.setBounds(25, 37, 147, 34);
+		rdbtnMedio.setForeground(new Color(215, 133, 21));
+		rdbtnMedio.setBounds(48, 37, 189, 34);
 		panel_1.add(rdbtnMedio);
-		rdbtnMedio.setFont(new Font("Arial", Font.PLAIN, 20));
+		rdbtnMedio.setFont(new Font("Arial", Font.BOLD, 27));
 
 		rdbtnAvanzado = new JRadioButton("Avanzado");
-		rdbtnAvanzado.setBounds(25, 74, 147, 34);
+		rdbtnAvanzado.setForeground(new Color(165, 42, 42));
+		rdbtnAvanzado.setBounds(48, 74, 189, 34);
 		panel_1.add(rdbtnAvanzado);
-		rdbtnAvanzado.setFont(new Font("Arial", Font.PLAIN, 20));
+		rdbtnAvanzado.setFont(new Font("Arial", Font.BOLD, 27));
 
 		bgroup = new ButtonGroup();
 		bgroup.add(rdbtnPrincipiante);
@@ -81,16 +84,25 @@ public class DificultdadUsuario extends JFrame {
 		panel.setLayout(null);
 
 		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setForeground(new Color(255, 255, 255));
+		btnAceptar.setBackground(new Color(0, 128, 128));
 		btnAceptar.setBounds(0, 0, 138, 34);
 		panel.add(btnAceptar);
-		btnAceptar.setFont(new Font("Arial", Font.PLAIN, 19));
+		btnAceptar.setFont(new Font("Arial", Font.BOLD, 19));
 
 		btnAceptar.addActionListener(accept);
 
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBackground(new Color(223, 223, 223));
 		btnCancelar.setBounds(148, 0, 138, 34);
 		panel.add(btnCancelar);
 		btnCancelar.setFont(new Font("Arial", Font.PLAIN, 19));
+		
+		JLabel lblNewLabel_1 = new JLabel("MASTERMIND");
+		lblNewLabel_1.setFont(new Font("Arial Black", Font.BOLD, 32));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(57, 34, 286, 68);
+		contentPane.add(lblNewLabel_1);
 
 		btnCancelar.addActionListener(cancelar);
 
