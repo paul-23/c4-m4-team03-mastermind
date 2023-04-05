@@ -29,7 +29,7 @@ public class DificultdadUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public DificultdadUsuario() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(DificultdadUsuario.class.getResource("/imagenes/icono.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DificultdadUsuario.class.getResource("/team03/C4_M4_Mastermind/assets/icono.png")));
 		setTitle("Seleccionar nivel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 415, 468);
