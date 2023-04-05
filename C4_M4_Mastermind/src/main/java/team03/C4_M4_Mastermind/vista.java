@@ -45,12 +45,12 @@ public class vista extends JFrame {
 	private JButton btnNewButton_2;
 	private JButton btnNewButton_3;
 	private JButton comp;
+	private JPanel panel = new JPanel();
 
-	Color[] arrCol = { Color.RED, Color.pink, Color.yellow, Color.green, Color.black, Color.gray, Color.blue,
+	private Color[] arrayDificultad;
+	private Color[] arraySolucion;
+	private Color[] arrCol = { Color.RED, Color.pink, Color.yellow, Color.green, Color.black, Color.gray, Color.blue,
 			Color.orange, Color.magenta, Color.cyan };
-
-	Color arrayDificultad[];
-	Color arraySolucion[];
 
 	final ArrayList<JButton> botones = new ArrayList<>();
 
@@ -59,19 +59,19 @@ public class vista extends JFrame {
 			JButton jb = (JButton) e.getSource();
 
 			int con = 0;
-			for (int i = 0; i < arrCol.length - 1; i++) {
-				if (jb.getBackground().equals(arrCol[i])) {
+			for (int i = 0; i < arrayDificultad.length - 1; i++) {
+				if (jb.getBackground().equals(arrayDificultad[i])) {
 					con = i + 1;
 				}
 			}
-			jb.setBackground(arrCol[(con)]);
+			jb.setBackground(arrayDificultad[(con)]);
 
 		}
 	};
 
 	public vista(int intentos, int colores) {
-		Color arrayDificultad[] = new Color[colores];
-		Color arraySolucion[] = new Color[4];
+		arrayDificultad = new Color[colores];
+		arraySolucion = new Color[4];
 		setIconImage(Toolkit.getDefaultToolkit().getImage(vista.class.getResource("/imagenes/icono.png")));
 		setTitle("MasterMind"); // Ponemos el título de la ventana de la aplicación
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,15 +81,9 @@ public class vista extends JFrame {
 
 		setContentPane(contentPane1);
 		contentPane1.setLayout(null);
-		
-		//------------------------------------------------------------------------------------
-		
 
-		
-		
-		
-		
-		
+		// ------------------------------------------------------------------------------------
+
 //-----------------------------------------------------------------------------------------------------------
 		panelSolucion = new JPanel();
 		panelSolucion.setBorder(new TitledBorder(
@@ -109,18 +103,15 @@ public class vista extends JFrame {
 		panelSolucion.add(btn2e);
 		btn2e.setEnabled(false);
 
-
 		btn3e = new JButton("");
 		btn3e.setBounds(90, 23, 30, 30);
 		panelSolucion.add(btn3e);
 		btn3e.setEnabled(false);
 
-
 		btn4e = new JButton("");
 		btn4e.setBounds(130, 23, 30, 30);
 		panelSolucion.add(btn4e);
 		btn4e.setEnabled(false);
-
 
 		panelColores = new JPanel();
 		panelColores.setLayout(null);
@@ -188,34 +179,22 @@ public class vista extends JFrame {
 
 		mntmInformacion = new JMenuItem("Información");
 		mnAbout.add(mntmInformacion);
+
 		
-		JPanel panel = new JPanel();
 		panel.setBounds(30, 58, 662, 403);
 		contentPane1.add(panel);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("50dlu"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				ColumnSpec.decode("50dlu"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
+		panel.setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("50dlu"), FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						ColumnSpec.decode("50dlu"), },
+				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
 		comp = new JButton("Comprovar");
 		panel.add(comp, "1, 2");
-		
+
 		comp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// System.out.println(botones.get(botones.size()-4).getBackground());
@@ -225,25 +204,25 @@ public class vista extends JFrame {
 						&& botones.get(botones.size() - 1).getBackground().equals(arraySolucion[3])) {
 					System.out.println("Has ganado!");
 				}
-				crear(botones, arrCol);
+				crear(botones, arrayDificultad);
 			}
 		});
-		
+
 		btnNewButton = new JButton("New button");
 		panel.add(btnNewButton, "1, 4");
-		btnNewButton.setBackground(arrCol[0]);
-		
+		btnNewButton.setBackground(Color.white);
+
 		btnNewButton_1 = new JButton("New button");
 		panel.add(btnNewButton_1, "3, 4");
-		btnNewButton_1.setBackground(arrCol[0]);
-		
+		btnNewButton_1.setBackground(Color.white);
+
 		btnNewButton_3 = new JButton("New button");
 		panel.add(btnNewButton_3, "7, 4");
-		btnNewButton_3.setBackground(arrCol[0]);
-		
+		btnNewButton_3.setBackground(Color.white);
+
 		btnNewButton_2 = new JButton("New button");
 		panel.add(btnNewButton_2, "9, 4");
-		btnNewButton_2.setBackground(arrCol[0]);
+		btnNewButton_2.setBackground(Color.white);
 		btnColor6.setVisible(false);
 
 		botones.add(btnNewButton);
@@ -254,18 +233,17 @@ public class vista extends JFrame {
 		btnNewButton_1.addActionListener(cambiar);
 		btnNewButton_3.addActionListener(cambiar);
 		btnNewButton_2.addActionListener(cambiar);
-		
+
 		mntmInformacion.addActionListener(mostrarInformacion);
 
 		setVisible(true);
 
-
-		
 		JButton[] btnColoresDisponibles = { btnColor1, btnColor2, btnColor3, btnColor4, btnColor5, btnColor6 };
 		JButton[] btnSelecionados = { btn1e, btn2e, btn3e, btn4e };
 		ArrayList<Integer> numbers = new ArrayList<Integer>();
 
-		// Generamos los colores según la dificultad escojida, con colores unicos del array
+		// Generamos los colores según la dificultad escojida, con colores unicos del
+		// array
 		int num = 0;
 		while (numbers.size() < colores) {
 			int randomNumber = (int) Math.round(Math.random() * 9);
@@ -278,7 +256,8 @@ public class vista extends JFrame {
 			}
 		}
 
-		// Generaamos los colores escojidos por le ordenador como solucion, puede contener dos valores iguales
+		// Generaamos los colores escojidos por le ordenador como solucion, puede
+		// contener dos valores iguales
 		for (int i = 0; i < arraySolucion.length; i++) {
 			int randomNumber = (int) Math.round(Math.random() * (arraySolucion.length - 1));
 			Color colorSelec = arrayDificultad[randomNumber];
@@ -334,20 +313,20 @@ public class vista extends JFrame {
 		}
 //		System.out.println(botones.size());
 
-		JButton bot1 = new JButton();
-		contentPane.add(bot1, "1, " + (2 + (botones.size() / 4)) + ", center, center");
+		JButton bot1 = new JButton("a");
+		panel.add(bot1, "1, " + (4 + (botones.size() / 2)) + ", center, center");
 		bot1.addActionListener(cambiar);
 
 		JButton bot2 = new JButton();
-		contentPane.add(bot2, "2, " + (2 + (botones.size() / 4)) + ", center, center");
+		panel.add(bot2, "3, " + (4 + (botones.size() / 2)) + ", center, center");
 		bot2.addActionListener(cambiar);
 
 		JButton bot3 = new JButton();
-		contentPane.add(bot3, "3," + (2 + (botones.size() / 4)) + ", center, center");
+		panel.add(bot3, "7," + (4 + (botones.size() / 2)) + ", center, center");
 		bot3.addActionListener(cambiar);
 
 		JButton bot4 = new JButton();
-		contentPane.add(bot4, "4," + (2 + (botones.size() / 4)) + ", center, center");
+		panel.add(bot4, "9," + (4 + (botones.size() / 2)) + ", center, center");
 		bot4.addActionListener(cambiar);
 //		setContentPane(bot4);
 
