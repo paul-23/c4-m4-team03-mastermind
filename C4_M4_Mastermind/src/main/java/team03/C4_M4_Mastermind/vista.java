@@ -166,7 +166,7 @@ public class vista extends JFrame {
 		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 20));
 		lblNewLabel_2.setBounds(559, 587, 252, 43);
 		contentPane1.add(lblNewLabel_2);
-		colorLabelDificultad(intentos);
+		labelDificultad(intentos);
 		
 		lblNewLabel_3 = new JLabel("Intentos");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -257,7 +257,7 @@ public class vista extends JFrame {
 
 	}
 	
-	public void colorLabelDificultad(int intentos) {
+	public void labelDificultad(int intentos) {
 		switch (intentos) {
 		case 10:
 			lblNewLabel_2.setForeground(new Color(0, 102, 0));
@@ -350,10 +350,13 @@ public class vista extends JFrame {
 				}
 				System.out.println(numBlancas + "" + numNegras);
 				disableButtons();
+				mostrarPosicionesCorrectas();
+				altura = altura + 55;
 				crear(botones, arrayDificultad);
 			}
 		} else {
 			disableButtons();
+			mostrarPosicionesCorrectas();
 			JLabel label = new JLabel("<html><h1>¡Has perdido! Número de intentos superado</h1></html>");
 			label.setFont(new Font("Arial", Font.BOLD, 20)); // Cambiamos la fuente y tamaño del texto
 			JOptionPane.showMessageDialog(contentPane1, label);
@@ -440,6 +443,11 @@ public class vista extends JFrame {
 
 		btnNewButton.setBounds(new Rectangle(59, 7, 40, 40));
 
+		super.update(this.getGraphics());
+
+	}
+	
+	private void mostrarPosicionesCorrectas() {
 		panel_1 = new JPanel();
 		panel_1.setBounds(321, altura, 182, 54);
 		contentPane1.add(panel_1);
@@ -469,14 +477,6 @@ public class vista extends JFrame {
 		btnBN4.setBounds(138, 12, 30, 30);
 		panel_1.add(btnBN4);
 		btnBN4.setBackground(Color.WHITE);
-		altura = altura + 55;
-
-		super.update(this.getGraphics());
-
-	}
-	
-	private void labelDificultad() {
-		
 	}
 
 	private void disableButtons() {
