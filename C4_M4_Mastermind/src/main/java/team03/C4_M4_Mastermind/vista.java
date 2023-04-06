@@ -5,10 +5,15 @@ import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -152,9 +157,9 @@ public class vista extends JFrame {
 
 		lblNewLabel = new JLabel("MASTERMIND");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial Black", Font.BOLD, 32));
+		lblNewLabel.setFont(new Font("Arial Black", Font.BOLD, 40));
 		lblNewLabel.setForeground(new Color(0, 102, 153));
-		lblNewLabel.setBounds(30, 48, 781, 60);
+		lblNewLabel.setBounds(30, 42, 781, 60);
 		contentPane1.add(lblNewLabel);
 
 		lblNewLabel_1 = new JLabel("Nivel actual");
@@ -184,35 +189,43 @@ public class vista extends JFrame {
 		contentPane1.add(lblNewLabel_4);
 
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setFont(new Font("Arial", Font.PLAIN, 19));
 		menuBar.setBackground(new Color(255, 255, 255));
 		menuBar.setBounds(0, 0, 1026, 31);
 		contentPane1.add(menuBar);
 
-		JMenu mnOpciones = new JMenu("Opciones");
+		JMenu mnOpciones = new JMenu("Archivo");
+		mnOpciones.setFont(new Font("Arial", Font.PLAIN, 19));
 		menuBar.add(mnOpciones);
 
 		JMenuItem mntmNuevaPartida = new JMenuItem("Nueva partida");
+		mntmNuevaPartida.setFont(new Font("Arial", Font.PLAIN, 19));
 		mnOpciones.add(mntmNuevaPartida);
 		mntmNuevaPartida.addActionListener(nuevaPartida);
 
 		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.setFont(new Font("Arial", Font.PLAIN, 19));
 		mnOpciones.add(mntmSalir);
 		mntmSalir.addActionListener(salir);
 
 		JMenu mnAbout = new JMenu("Ayuda");
+		mnAbout.setFont(new Font("Arial", Font.PLAIN, 19));
 		menuBar.add(mnAbout);
 
 		chckbxmntmMostrarSolucion = new JCheckBoxMenuItem("Mostrar Solución");
+		chckbxmntmMostrarSolucion.setFont(new Font("Arial", Font.PLAIN, 19));
 		mnAbout.add(chckbxmntmMostrarSolucion);
 		chckbxmntmMostrarSolucion.setSelected(false);
 		chckbxmntmMostrarSolucion.addActionListener(mostrarSolucion);
 
 		mntmAyuda = new JMenuItem("Ayuda");
+		mntmAyuda.setFont(new Font("Arial", Font.PLAIN, 19));
 		mnAbout.add(mntmAyuda);
 
 		mntmAyuda.addActionListener(mostrarAyuda);
 
 		mntmInformacion = new JMenuItem("Información");
+		mntmInformacion.setFont(new Font("Arial", Font.PLAIN, 19));
 		mnAbout.add(mntmInformacion);
 		mntmInformacion.addActionListener(mostrarInformacion);
 
@@ -290,20 +303,40 @@ public class vista extends JFrame {
 
 	};
 
-	ActionListener cambiar = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			JButton jb = (JButton) e.getSource();
+	// ------ Clic derecho avanzar, izquierdo retrocedes - seleccion de colores ---
 
-			int con = 0;
-			for (int i = 0; i < arrayDificultad.length - 1; i++) {
-				if (jb.getBackground().equals(arrayDificultad[i])) {
-					con = i + 1;
+	JButton jBtnSeleccionColores;
+	Map<JButton, Integer> posicionesArrayColores = new HashMap<>();
+
+	MouseAdapter cambiar = new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			jBtnSeleccionColores = (JButton) e.getSource();
+			if (jBtnSeleccionColores.isEnabled()) {
+				int index = posicionesArrayColores.getOrDefault(jBtnSeleccionColores, 0);
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					jBtnSeleccionColores.setBackground(arrayDificultad[index]);
+					index = (index + 1) % arrayDificultad.length;
+					posicionesArrayColores.put(jBtnSeleccionColores, index);
+				} else if (e.getButton() == MouseEvent.BUTTON3) {
+					index = (index + arrayDificultad.length - 1) % arrayDificultad.length;
+					jBtnSeleccionColores.setBackground(arrayDificultad[index]);
+					posicionesArrayColores.put(jBtnSeleccionColores, index);
 				}
 			}
-			jb.setBackground(arrayDificultad[(con)]);
-
 		}
 	};
+
+	/*
+	 * ActionListener cambiar = new ActionListener() { public void
+	 * actionPerformed(ActionEvent e) { JButton jb = (JButton) e.getSource();
+	 * 
+	 * int con = 0; for (int i = 0; i < arrayDificultad.length - 1; i++) { if
+	 * (jb.getBackground().equals(arrayDificultad[i])) { con = i + 1; } }
+	 * jb.setBackground(arrayDificultad[(con)]);
+	 * 
+	 * } };
+	 */
 
 	ActionListener nuevaPartida = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -319,7 +352,7 @@ public class vista extends JFrame {
 
 		}
 	};
-	
+
 	ActionListener salir = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
@@ -440,20 +473,20 @@ public class vista extends JFrame {
 		panel.add(btnNewButton);
 		btnNewButton.setBackground(Color.white);
 		botones.add(btnNewButton);
-		btnNewButton.addActionListener(cambiar);
+		btnNewButton.addMouseListener(cambiar);
 
 		btnNewButton_1 = new JButton();
 		btnNewButton_1.setBounds(116, 7, 40, 40);
 		panel.add(btnNewButton_1);
 		btnNewButton_1.setBackground(Color.white);
 		botones.add(btnNewButton_1);
-		btnNewButton_1.addActionListener(cambiar);
+		btnNewButton_1.addMouseListener(cambiar);
 
 		btnNewButton_2 = new JButton();
 		btnNewButton_2.setBounds(173, 7, 40, 40);
 		panel.add(btnNewButton_2);
 		btnNewButton_2.setBackground(Color.white);
-		btnNewButton_2.addActionListener(cambiar);
+		btnNewButton_2.addMouseListener(cambiar);
 		botones.add(btnNewButton_2);
 
 		btnNewButton_3 = new JButton();
@@ -461,7 +494,7 @@ public class vista extends JFrame {
 		panel.add(btnNewButton_3);
 		btnNewButton_3.setBackground(Color.white);
 		botones.add(btnNewButton_3);
-		btnNewButton_3.addActionListener(cambiar);
+		btnNewButton_3.addMouseListener(cambiar);
 
 		btnNewButton.setBounds(new Rectangle(59, 7, 40, 40));
 
