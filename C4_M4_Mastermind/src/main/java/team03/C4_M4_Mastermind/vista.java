@@ -43,7 +43,7 @@ public class vista extends JFrame {
 	private JLabel lblNumeroIntento;
 	private JPanel panel, panel_1;
 	private JButton btnNewButton, btnNewButton_1, btnNewButton_2, btnNewButton_3;
-	private JButton btnBN1, btnBN2, btnBN3, btnBN4;
+	private JButton btnAciertosBN, btnBN2, btnBN3, btnBN4;
 	private JCheckBoxMenuItem chckbxmntmMostrarSolucion;
 	private JMenuItem mntmAyuda, mntmInformacion;
 	private JButton comp;
@@ -372,47 +372,68 @@ public class vista extends JFrame {
 				JOptionPane.showMessageDialog(contentPane1, label);
 				disableButtons();
 			} else {
-				ArrayList<JButton> buttonAux = new ArrayList<>();
-				for (int i = 1; i <= 4; i++) {
-					buttonAux.add(botones.get(botones.size() - i));
-				}
-				int[] negras = new int[4]; // Array para almacenar los colores correctos y en su posición
-				int[] blancas = new int[4]; // Array para almacenar los colores correctos en posición incorrecta
-				int numNegras = 0; // Contador para el número de colores correctos y en su posición
-				int numBlancas = 0; // Contador número de colores correctos pero en una posición incorrecta
-
-				// Comprobando las negras
+				JButton[] buttonAux1 = new JButton[4];
+				int arrayPos = 4;
 				for (int i = 0; i < 4; i++) {
-					if (buttonAux.get(i).getBackground().equals(btnSelecionados[i].getBackground())) {
-						negras[numNegras] = 1; // Añadimos un "1" al array de negras
-						numNegras++; // Incrementamos el contador de negras
+					buttonAux1[i] = botones.get(botones.size() - arrayPos);
+					arrayPos = arrayPos - 1;
+				}
+				int negros = 0;
+				int blancos = 0;
+				boolean[] encontradosSecretos = new boolean[buttonAux1.length];
+				boolean[] encontradosCombinacion = new boolean[buttonAux1.length];
+
+				for (int i = 0; i < buttonAux1.length; i++) {
+					if (btnSelecionados[i].getBackground().equals(buttonAux1[i].getBackground())) {
+						negros++;
+						encontradosSecretos[i] = true;
+						encontradosCombinacion[i] = true;
 					}
-					posicion1 = posicion1 - 1;
 				}
 
-				// Comprobando las blancas
-				for (int i = 0; i < 4; i++) {
-					// Si el color no está en su posición correcta
-					if (!buttonAux.get(i).getBackground().equals(btnSelecionados[i].getBackground())) {
-						for (int j = 0; j < 4; j++) { // Buscamos si está en otra posición
-							if (buttonAux.get(i).getBackground().equals(btnSelecionados[j].getBackground())
-									&& negras[j] != 1 && blancas[j] != 1) {
-								blancas[numBlancas] = 1; // Añadimos un "1" al array de blancas
-								numBlancas++; // Incrementamos el contador de blancas
-								break; // Salimos del bucle interior para no contar dos veces un mismo color
+				for (int i = 0; i < btnSelecionados.length; i++) {
+					if (!encontradosCombinacion[i]) {
+						for (int j = 0; j < btnSelecionados.length; j++) {
+							if (!encontradosSecretos[j] && buttonAux1[i].getBackground().equals(btnSelecionados[j].getBackground())) {
+								blancos++;
+								encontradosSecretos[j] = true;
+								encontradosCombinacion[i] = true;
+								break;
 							}
 						}
 					}
-					posicion2 = posicion2 - 1;
 				}
+
+				/*
+				 * int[] negras = new int[4]; // Array para almacenar los colores correctos y en
+				 * su posición int[] blancas = new int[4]; // Array para almacenar los colores
+				 * correctos en posición incorrecta int numNegras = 0; // Contador para el
+				 * número de colores correctos y en su posición int numBlancas = 0; // Contador
+				 * número de colores correctos pero en una posición incorrecta
+				 * 
+				 * // Comprobando las negras for (int i = 0; i < 4; i++) { if
+				 * (buttonAux.get(i).getBackground().equals(btnSelecionados[i].getBackground()))
+				 * { negras[numNegras] = 1; // Añadimos un "1" al array de negras numNegras++;
+				 * // Incrementamos el contador de negras } posicion1 = posicion1 - 1; }
+				 * 
+				 * // Comprobando las blancas for (int i = 0; i < 4; i++) { // Si el color no
+				 * está en su posición correcta if
+				 * (!buttonAux.get(i).getBackground().equals(btnSelecionados[i].getBackground())
+				 * ) { for (int j = 0; j < 4; j++) { // Buscamos si está en otra posición if
+				 * (buttonAux.get(i).getBackground().equals(btnSelecionados[j].getBackground())
+				 * && negras[j] != 1 && blancas[j] != 1) { blancas[numBlancas] = 1; // Añadimos
+				 * un "1" al array de blancas numBlancas++; // Incrementamos el contador de
+				 * blancas break; // Salimos del bucle interior para no contar dos veces un
+				 * mismo color } } } posicion2 = posicion2 - 1; }
+				 */
+
 				disableButtons();
-				mostrarPosicionesCorrectas();
+				mostrarPosicionesCorrectas(negros, blancos);
 				altura = altura + 55;
 				crear(botones, arrayDificultad);
 			}
 		} else {
 			disableButtons();
-			mostrarPosicionesCorrectas();
 			JLabel label = new JLabel("<html><h1>¡Has perdido! Número de intentos superado</h1></html>");
 			label.setFont(new Font("Arial", Font.BOLD, 20)); // Cambiamos la fuente y tamaño del texto
 			JOptionPane.showMessageDialog(contentPane1, label);
@@ -502,20 +523,33 @@ public class vista extends JFrame {
 
 	}
 
-	private void mostrarPosicionesCorrectas() {
+	private void mostrarPosicionesCorrectas(int negros, int blancos) {
+		int horizontal = 12;
 		panel_1 = new JPanel();
 		panel_1.setBounds(321, altura, 182, 54);
 		contentPane1.add(panel_1);
 		panel_1.setLayout(null);
 		panel_1.setVisible(true);
 
-		btnBN1 = new JButton();
-		btnBN1.setEnabled(false);
-		btnBN1.setBounds(12, 12, 30, 30);
-		panel_1.add(btnBN1);
-		btnBN1.setBackground(Color.WHITE);
+		for (int i = 0; i < negros; i++) {
+			btnAciertosBN = new JButton();
+			btnAciertosBN.setEnabled(false);
+			btnAciertosBN.setBounds(horizontal, 12, 30, 30);
+			panel_1.add(btnAciertosBN);
+			btnAciertosBN.setBackground(Color.black);
+			horizontal = horizontal + 42;
+		}
+		
+		for (int i = 0; i < blancos; i++) {
+			btnAciertosBN = new JButton();
+			btnAciertosBN.setEnabled(false);
+			btnAciertosBN.setBounds(horizontal, 12, 30, 30);
+			panel_1.add(btnAciertosBN);
+			btnAciertosBN.setBackground(Color.white);
+			horizontal = horizontal + 42;
+		}
 
-		btnBN2 = new JButton();
+		/*btnBN2 = new JButton();
 		btnBN2.setEnabled(false);
 		btnBN2.setBounds(54, 12, 30, 30);
 		panel_1.add(btnBN2);
@@ -531,7 +565,7 @@ public class vista extends JFrame {
 		btnBN4.setEnabled(false);
 		btnBN4.setBounds(138, 12, 30, 30);
 		panel_1.add(btnBN4);
-		btnBN4.setBackground(Color.WHITE);
+		btnBN4.setBackground(Color.WHITE);*/
 	}
 
 	private void disableButtons() {
