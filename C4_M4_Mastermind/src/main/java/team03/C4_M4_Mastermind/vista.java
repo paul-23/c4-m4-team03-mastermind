@@ -61,6 +61,7 @@ public class vista extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 858, 772);
 		contentPane1 = new JPanel();
+		contentPane1.setBackground(new Color(215, 242, 255));
 		contentPane1.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane1);
@@ -69,6 +70,7 @@ public class vista extends JFrame {
 		// ----------- PANEL BOTONES SOLUCION -----------
 
 		panelSolucion = new JPanel();
+		panelSolucion.setBackground(new Color(215, 242, 255));
 		panelSolucion.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Combinaci\u00F3n secreta", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -92,6 +94,7 @@ public class vista extends JFrame {
 		// ----------- PANEL BOTONES COLORES DISPONIBELS -----------
 
 		panelColores = new JPanel();
+		panelColores.setBackground(new Color(215, 242, 255));
 		panelColores.setLayout(null);
 		panelColores.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
@@ -134,28 +137,28 @@ public class vista extends JFrame {
 
 		lblNewLabel_1 = new JLabel("Nivel actual");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblNewLabel_1.setBounds(559, 548, 252, 43);
 		contentPane1.add(lblNewLabel_1);
 
 		lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 20));
+		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 22));
 		lblNewLabel_2.setBounds(559, 587, 252, 43);
 		contentPane1.add(lblNewLabel_2);
 		labelDificultad(intentos);
 
 		lblNewLabel_3 = new JLabel("Intentos");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblNewLabel_3.setBounds(735, 628, 76, 43);
 		contentPane1.add(lblNewLabel_3);
 
 		lblNewLabel_4 = new JLabel("" + intentos);
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_4.setForeground(new Color(0, 0, 0));
-		lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 20));
-		lblNewLabel_4.setBounds(697, 628, 35, 43);
+		lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 22));
+		lblNewLabel_4.setBounds(689, 628, 35, 43);
 		contentPane1.add(lblNewLabel_4);
 
 		// ----------- MENU BAR -----------
@@ -445,6 +448,7 @@ public class vista extends JFrame {
 		intentosLabel++;
 
 		panel = new JPanel();
+		panel.setBackground(new Color(215, 242, 255));
 		panel.setBounds(30, altura, 281, 54);
 		contentPane1.add(panel);
 		panel.setLayout(null);
@@ -480,6 +484,7 @@ public class vista extends JFrame {
 		panel_1 = new JPanel();
 		panel_1.setBounds(321, altura, 182, 54);
 		contentPane1.add(panel_1);
+		panel_1.setBackground(new Color(215, 242, 255));
 		panel_1.setLayout(null);
 		panel_1.setVisible(true);
 
