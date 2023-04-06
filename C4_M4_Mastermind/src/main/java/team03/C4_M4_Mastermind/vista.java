@@ -300,8 +300,11 @@ public class vista extends JFrame {
 
 	ActionListener nuevaPartida = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			JLabel label = new JLabel("<html><h1>¿Iniciar nueva partida?</h1></html>");
+			label.setFont(new Font("Arial", Font.BOLD, 20)); // Cambiamos la fuente y tamaño del texto
 			ImageIcon icon = new ImageIcon(getClass().getResource("/team03/C4_M4_Mastermind/assets/icono.png"));
-			int input = JOptionPane.showConfirmDialog(contentPane1, "¿Iniciar nueva partida?", "Nueva partida",
+			
+			int input = JOptionPane.showConfirmDialog(contentPane1, label, "Nueva partida",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
 			switch (input) {
 			case 0:
@@ -309,7 +312,6 @@ public class vista extends JFrame {
 				new DificultdadUsuario();
 				break;
 			}
-
 		}
 	};
 
