@@ -312,7 +312,6 @@ public class vista extends JFrame {
 				new DificultdadUsuario();
 				break;
 			}
-
 		}
 	};
 
