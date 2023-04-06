@@ -57,7 +57,7 @@ public class vista extends JFrame {
 		arrayDificultad = new Color[colores];
 		arraySolucion = new Color[4];
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(vista.class.getResource("/team03/C4_M4_Mastermind/assets/icono.png")));
+				.getImage(vista.class.getResource("/team03/C4_M4_Mastermind/assets/iconoG.png")));
 		setTitle("MasterMind"); // Ponemos el título de la ventana de la aplicación
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 858, 772);
@@ -307,10 +307,9 @@ public class vista extends JFrame {
 
 	ActionListener nuevaPartida = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			ImageIcon icon = new ImageIcon("/team03/C4_M4_Mastermind/assets/icono.png");
-			int input = JOptionPane.showConfirmDialog(null, "¿Iniciar nueva partida?", "Nueva partida",
+			ImageIcon icon = new ImageIcon(getClass().getResource("/team03/C4_M4_Mastermind/assets/icono.png"));
+			int input = JOptionPane.showConfirmDialog(contentPane1, "¿Iniciar nueva partida?", "Nueva partida",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
-			// int input = JOptionPane.showConfirmDialog(null, "Do you like bacon?");
 			switch (input) {
 			case 0:
 				setVisible(false);
