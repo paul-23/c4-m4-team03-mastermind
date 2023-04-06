@@ -85,7 +85,7 @@ public class DificultdadUsuario extends JFrame {
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setForeground(new Color(255, 255, 255));
-		btnAceptar.setBackground(new Color(0, 128, 128));
+		btnAceptar.setBackground(new Color(0, 102, 153));
 		btnAceptar.setBounds(0, 0, 138, 34);
 		panel.add(btnAceptar);
 		btnAceptar.setFont(new Font("Arial", Font.BOLD, 19));
@@ -93,12 +93,14 @@ public class DificultdadUsuario extends JFrame {
 		btnAceptar.addActionListener(accept);
 
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBackground(new Color(223, 223, 223));
+		btnCancelar.setForeground(new Color(0, 102, 153));
+		btnCancelar.setBackground(new Color(255, 255, 255));
 		btnCancelar.setBounds(148, 0, 138, 34);
 		panel.add(btnCancelar);
 		btnCancelar.setFont(new Font("Arial", Font.PLAIN, 19));
 		
 		JLabel lblNewLabel_1 = new JLabel("MASTERMIND");
+		lblNewLabel_1.setForeground(new Color(0, 102, 153));
 		lblNewLabel_1.setFont(new Font("Arial Black", Font.BOLD, 32));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(57, 34, 286, 68);
