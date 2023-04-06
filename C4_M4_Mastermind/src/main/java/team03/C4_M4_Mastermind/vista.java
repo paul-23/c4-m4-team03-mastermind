@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
@@ -140,40 +141,41 @@ public class vista extends JFrame {
 		panelColores.add(btnColor6);
 		btnColor6.setEnabled(false);
 		btnColor6.setVisible(false);
-		
+
 		btnNewGame = new JButton("Nueva partida");
 		btnNewGame.setForeground(new Color(0, 102, 153));
 		btnNewGame.setFont(new Font("Tahoma", Font.BOLD, 23));
 		btnNewGame.setBackground(new Color(255, 255, 255));
 		btnNewGame.setBounds(559, 119, 252, 43);
 		contentPane1.add(btnNewGame);
-		
+		btnNewGame.addActionListener(nuevaPartida);
+
 		lblNewLabel = new JLabel("MASTERMIND");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Arial Black", Font.BOLD, 32));
 		lblNewLabel.setForeground(new Color(0, 102, 153));
 		lblNewLabel.setBounds(30, 48, 781, 60);
 		contentPane1.add(lblNewLabel);
-		
+
 		lblNewLabel_1 = new JLabel("Nivel actual");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_1.setBounds(559, 548, 252, 43);
 		contentPane1.add(lblNewLabel_1);
-		
+
 		lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 20));
 		lblNewLabel_2.setBounds(559, 587, 252, 43);
 		contentPane1.add(lblNewLabel_2);
 		labelDificultad(intentos);
-		
+
 		lblNewLabel_3 = new JLabel("Intentos");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_3.setBounds(735, 628, 76, 43);
 		contentPane1.add(lblNewLabel_3);
-		
+
 		lblNewLabel_4 = new JLabel("" + intentos);
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_4.setForeground(new Color(0, 0, 0));
@@ -189,13 +191,21 @@ public class vista extends JFrame {
 		JMenu mnOpciones = new JMenu("Opciones");
 		menuBar.add(mnOpciones);
 
-		chckbxmntmMostrarSolucion = new JCheckBoxMenuItem("Mostrar Solución");
-		chckbxmntmMostrarSolucion.setSelected(false);
-		mnOpciones.add(chckbxmntmMostrarSolucion);
-		chckbxmntmMostrarSolucion.addActionListener(mostrarSolucion);
+		JMenuItem mntmNuevaPartida = new JMenuItem("Nueva partida");
+		mnOpciones.add(mntmNuevaPartida);
+		mntmNuevaPartida.addActionListener(nuevaPartida);
+
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mnOpciones.add(mntmSalir);
+		mntmSalir.addActionListener(salir);
 
 		JMenu mnAbout = new JMenu("Ayuda");
 		menuBar.add(mnAbout);
+
+		chckbxmntmMostrarSolucion = new JCheckBoxMenuItem("Mostrar Solución");
+		mnAbout.add(chckbxmntmMostrarSolucion);
+		chckbxmntmMostrarSolucion.setSelected(false);
+		chckbxmntmMostrarSolucion.addActionListener(mostrarSolucion);
 
 		mntmAyuda = new JMenuItem("Ayuda");
 		mnAbout.add(mntmAyuda);
@@ -256,7 +266,7 @@ public class vista extends JFrame {
 		}
 
 	}
-	
+
 	public void labelDificultad(int intentos) {
 		switch (intentos) {
 		case 10:
@@ -277,9 +287,9 @@ public class vista extends JFrame {
 			lblNewLabel_2.setText("Fácil");
 			break;
 		}
-		
+
 	};
-	
+
 	ActionListener cambiar = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			JButton jb = (JButton) e.getSource();
@@ -293,7 +303,29 @@ public class vista extends JFrame {
 			jb.setBackground(arrayDificultad[(con)]);
 
 		}
-	};	
+	};
+
+	ActionListener nuevaPartida = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			ImageIcon icon = new ImageIcon("/team03/C4_M4_Mastermind/assets/icono.png");
+			int input = JOptionPane.showConfirmDialog(null, "¿Iniciar nueva partida?", "Nueva partida",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
+			// int input = JOptionPane.showConfirmDialog(null, "Do you like bacon?");
+			switch (input) {
+			case 0:
+				setVisible(false);
+				new DificultdadUsuario();
+				break;
+			}
+
+		}
+	};
+	
+	ActionListener salir = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	};
 
 	public void comprobar(int intentos) {
 		numIntentos++;
@@ -312,7 +344,6 @@ public class vista extends JFrame {
 				for (int i = 1; i <= 4; i++) {
 					buttonAux.add(botones.get(botones.size() - i));
 				}
-				System.out.println(buttonAux);
 				int[] negras = new int[4]; // Array para almacenar los colores correctos y en su posición
 				int[] blancas = new int[4]; // Array para almacenar los colores correctos en posición incorrecta
 				int numNegras = 0; // Contador para el número de colores correctos y en su posición
@@ -342,13 +373,6 @@ public class vista extends JFrame {
 					}
 					posicion2 = posicion2 - 1;
 				}
-				for (int i = 0; i < negras.length; i++) {
-					System.out.println("negras: " + negras[i]);
-				}
-				for (int i = 0; i < blancas.length; i++) {
-					System.out.println("blancas: " + blancas[i]);
-				}
-				System.out.println(numBlancas + "" + numNegras);
 				disableButtons();
 				mostrarPosicionesCorrectas();
 				altura = altura + 55;
@@ -395,7 +419,6 @@ public class vista extends JFrame {
 			}
 		}
 	};
-
 
 	private void crear(ArrayList<JButton> botones, Color[] arrCol) {
 
@@ -446,7 +469,7 @@ public class vista extends JFrame {
 		super.update(this.getGraphics());
 
 	}
-	
+
 	private void mostrarPosicionesCorrectas() {
 		panel_1 = new JPanel();
 		panel_1.setBounds(321, altura, 182, 54);
