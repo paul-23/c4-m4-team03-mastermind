@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import java.awt.Desktop;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -306,9 +307,9 @@ public class vista extends JFrame {
 			JLabel label = new JLabel("<html><h1>¿Iniciar nueva partida?</h1></html>");
 			label.setFont(new Font("Arial", Font.BOLD, 20)); // Cambiamos la fuente y tamaño del texto
 			ImageIcon icon = new ImageIcon(getClass().getResource("/team03/C4_M4_Mastermind/assets/icono.png"));
-			
-			int input = JOptionPane.showConfirmDialog(contentPane1, label, "Nueva partida",
-					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
+
+			int input = JOptionPane.showConfirmDialog(contentPane1, label, "Nueva partida", JOptionPane.YES_NO_OPTION,
+					JOptionPane.QUESTION_MESSAGE, icon);
 			switch (input) {
 			case 0:
 				setVisible(false);
@@ -343,13 +344,17 @@ public class vista extends JFrame {
 						&& botones.get(botones.size() - 2).getBackground().equals(arraySolucion[2])
 						&& botones.get(botones.size() - 1).getBackground().equals(arraySolucion[3])) {
 					// En caso afirmativo mosrtar mensaje de felicitaciones
-					JLabel label = new JLabel("<html><h1>¡Felicidades, has ganado!</h1></html>");
+
+					ImageIcon iconWin = new ImageIcon(
+							new ImageIcon(getClass().getResource("/team03/C4_M4_Mastermind/assets/victoria.png"))
+									.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+					JLabel label = new JLabel("<html><h1>¡Felicidades, has ganado!</h1></html>"); // Imagen de victoria
 					label.setFont(new Font("Arial", Font.BOLD, 20)); // Cambiamos la fuente y tamaño del texto
-					JOptionPane.showMessageDialog(contentPane1, label);
+					JOptionPane.showMessageDialog(contentPane1, label, "¡Victoria!", JOptionPane.INFORMATION_MESSAGE,
+							iconWin);
 					disableButtons();
 				} else {
-					// Si no coinciden todos comprobamos los que coinciden y mostramos blanco o
-					// negro
+					// Si no coinciden todos comprobamos los que si y contamos blanco o negro
 					// Negro: Color y posicion correcta
 					// Blanco: Color correcto, posición incorrecta
 
@@ -394,9 +399,13 @@ public class vista extends JFrame {
 			} else {
 				// Si superamos los intentos hemos perdido y mostramos un mensaje
 				disableButtons();
+				ImageIcon iconPerdido = new ImageIcon(
+						new ImageIcon(getClass().getResource("/team03/C4_M4_Mastermind/assets/perdido.png")).getImage()
+								.getScaledInstance(100, 100, Image.SCALE_DEFAULT)); // Imagen de partida perdida
 				JLabel label = new JLabel("<html><h1>¡Has perdido! Número de intentos superado</h1></html>");
 				label.setFont(new Font("Arial", Font.BOLD, 20)); // Cambiamos la fuente y tamaño del texto
-				JOptionPane.showMessageDialog(contentPane1, label);
+				JOptionPane.showMessageDialog(contentPane1, label, "¡Has perdido!", JOptionPane.INFORMATION_MESSAGE,
+						iconPerdido);
 			}
 		}
 	}
