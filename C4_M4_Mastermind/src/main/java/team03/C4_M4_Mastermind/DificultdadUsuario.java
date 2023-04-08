@@ -38,6 +38,7 @@ public class DificultdadUsuario extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBackground(new Color(215, 242, 255));
 
 		JLabel lblNewLabel = new JLabel("Selecciona la dificultad");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 22));
@@ -51,8 +52,10 @@ public class DificultdadUsuario extends JFrame {
 		panel_1.setBounds(57, 159, 286, 113);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
+		panel_1.setBackground(new Color(215, 242, 255));
 
 		rdbtnPrincipiante = new JRadioButton("Principiante");
+		rdbtnPrincipiante.setBackground(new Color(215, 242, 255));
 		rdbtnPrincipiante.setForeground(new Color(0, 102, 0));
 		rdbtnPrincipiante.setSelected(true);
 		rdbtnPrincipiante.setBounds(48, 0, 189, 34);
@@ -60,12 +63,14 @@ public class DificultdadUsuario extends JFrame {
 		rdbtnPrincipiante.setFont(new Font("Arial", Font.BOLD, 27));
 
 		rdbtnMedio = new JRadioButton("Medio");
+		rdbtnMedio.setBackground(new Color(215, 242, 255));
 		rdbtnMedio.setForeground(new Color(215, 133, 21));
 		rdbtnMedio.setBounds(48, 37, 189, 34);
 		panel_1.add(rdbtnMedio);
 		rdbtnMedio.setFont(new Font("Arial", Font.BOLD, 27));
 
 		rdbtnAvanzado = new JRadioButton("Avanzado");
+		rdbtnAvanzado.setBackground(new Color(215, 242, 255));
 		rdbtnAvanzado.setForeground(new Color(165, 42, 42));
 		rdbtnAvanzado.setBounds(48, 74, 189, 34);
 		panel_1.add(rdbtnAvanzado);
