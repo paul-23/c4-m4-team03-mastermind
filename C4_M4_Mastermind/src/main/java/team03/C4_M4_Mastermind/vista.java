@@ -24,6 +24,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
+import team03.C4_M4_Mastermind.models.Colores;
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JCheckBoxMenuItem;
@@ -33,10 +35,13 @@ import javax.swing.JMenu;
 import java.awt.Toolkit;
 import java.awt.Rectangle;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 public class vista extends JFrame {
+
 	// Variables globales (las usamos en todas las partes del proyecto)
 	private static final long serialVersionUID = 1L;
+
 	private JPanel panel, panel_1, contentPane1, panelColores, panelSolucion;
 	private JButton btnColor, btnSolucion, btnNewButton, btnAciertosBN, comp;
 	private JLabel lblNumeroIntento;
@@ -44,15 +49,21 @@ public class vista extends JFrame {
 	private JMenuItem mntmAyuda, mntmInformacion;
 	private JButton[] btnSelecionados = new JButton[4];
 	private Color[] arrayDificultad, arraySolucion;
-	private Color[] arrCol = { Color.RED, Color.pink, Color.yellow, Color.green, Color.black, Color.gray, Color.blue,
-			Color.orange, Color.magenta, Color.cyan };
+	private Color[] arrCol;
 	private final ArrayList<JButton> botones = new ArrayList<>();
-	private int intentosVista, numIntentos = 0, altura = 119, intentosLabel = 0;
+	private int partidasJugadas, intentosVista, numColores, numIntentos = 0, altura = 119, intentosLabel = 0;
 	private JButton btnNewGame;
 	private JLabel lblNewLabel, lblNewLabel_1, lblNewLabel_2, lblNewLabel_3, lblNewLabel_4;
+	private JButton[] btnColoresDisponibles;
+	private Colores datosCompartidos;
+	private CambioColores cm;
 
-	public vista(int intentos, int colores) {
+	public vista(int intentos, int colores, Colores dtCompartidos) {
+		datosCompartidos = dtCompartidos;
+		numColores = colores;
+		partidasJugadas = datosCompartidos.getPartidas();
 		intentosVista = intentos;
+		arrCol = datosCompartidos.getArrCol();
 		setResizable(false);
 		arrayDificultad = new Color[colores];
 		arraySolucion = new Color[4];
@@ -90,31 +101,6 @@ public class vista extends JFrame {
 			btnSolucion.setEnabled(false);
 			distanciaBotonesSolucion = distanciaBotonesSolucion + 40;
 			btnSelecionados[i] = btnSolucion;
-		}
-
-		// ----------- PANEL BOTONES COLORES DISPONIBELS -----------
-
-		panelColores = new JPanel();
-		panelColores.setBackground(new Color(215, 242, 255));
-		panelColores.setLayout(null);
-		panelColores.setBorder(new TitledBorder(
-				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Colores disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelColores.setBounds(559, 242, 252, 68);
-		contentPane1.add(panelColores);
-
-		// ----------- BOTONES COLORES DISPONIBELS -----------
-
-		JButton[] btnColoresDisponibles = new JButton[colores];
-		int distanciaBotonesColor = 10;
-		for (int i = 0; i < colores; i++) {
-			btnColor = new JButton("");
-			btnColor.setBounds(distanciaBotonesColor, 23, 30, 30);
-			panelColores.add(btnColor);
-			btnColor.setVisible(false);
-			btnColor.setEnabled(false);
-			btnColoresDisponibles[i] = btnColor;
-			distanciaBotonesColor = distanciaBotonesColor + 40;
 		}
 
 		// ----------- BOTONES NUEVA PARTIDA -----------
@@ -179,6 +165,15 @@ public class vista extends JFrame {
 		mnOpciones.add(mntmNuevaPartida);
 		mntmNuevaPartida.addActionListener(nuevaPartida);
 
+		JMenuItem mntmNewMenuItem = new JMenuItem("Cambiar colores");
+		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 19));
+		mnOpciones.add(mntmNewMenuItem);
+		mntmNewMenuItem.addActionListener(cambiarColores);
+		mntmNewMenuItem.setVisible(false);
+		if (partidasJugadas >= 1) {
+			mntmNewMenuItem.setVisible(true);
+		}
+
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mntmSalir.setFont(new Font("Arial", Font.PLAIN, 19));
 		mnOpciones.add(mntmSalir);
@@ -194,7 +189,7 @@ public class vista extends JFrame {
 		chckbxmntmMostrarSolucion.setSelected(false);
 		chckbxmntmMostrarSolucion.addActionListener(mostrarSolucion);
 
-		mntmAyuda = new JMenuItem("Ayuda");
+		mntmAyuda = new JMenuItem("Instrucciones");
 		mntmAyuda.setFont(new Font("Arial", Font.PLAIN, 19));
 		mnAbout.add(mntmAyuda);
 
@@ -215,29 +210,86 @@ public class vista extends JFrame {
 		setVisible(true);
 		crear(botones, arrayDificultad);
 
-		// JButton[] btnColoresDisponibles = { btnColor1, btnColor2, btnColor3,
-		// btnColor4, btnColor5, btnColor6 };
-		ArrayList<Integer> numbers = new ArrayList<Integer>();
-
 		comp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comprobar(intentosVista);
 			}
 		});
 
-		// Generamos los colores únicos según la dificultad escojida
-		int num = 0;
-		while (numbers.size() < colores) {
-			int randomNumber = (int) Math.round(Math.random() * 9);
-			if (!numbers.contains(randomNumber)) {
-				numbers.add(randomNumber);
-				arrayDificultad[num] = arrCol[randomNumber];
-				btnColoresDisponibles[num].setBackground(arrayDificultad[num]);
-				btnColoresDisponibles[num].setVisible(true);
-				num++;
-			}
+		escogerColores(arrayDificultad, colores);
+
+	}
+
+	public void ocultarVentana() {
+		this.setVisible(false);
+	}
+	
+	// ----------- CAMBIAR COLROES -----------
+	
+	ActionListener cambiarColores = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			cm = new CambioColores(numIntentos, numColores, datosCompartidos);
+			cm.setVisible(true);
+			setVisible(false);
+		}
+	};
+
+	// ----------- GENERAR COLORES POR DEFECTO O ESCOJIDOS -----------
+
+	public void escogerColores(Color[] arrayDificultad, int colores) {
+
+		// ----------- PANEL BOTONES COLORES DISPONIBELS -----------
+
+		panelColores = new JPanel();
+		panelColores.setBackground(new Color(215, 242, 255));
+		panelColores.setLayout(null);
+		panelColores.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Colores disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelColores.setBounds(559, 242, 252, 68);
+		contentPane1.add(panelColores);
+
+		ArrayList<Integer> numbers = new ArrayList<Integer>();
+		arrCol = datosCompartidos.getArrCol();
+
+		// ----------- BOTONES COLORES DISPONIBELS -----------
+
+		btnColoresDisponibles = new JButton[colores];
+		int distanciaBotonesColor = 10;
+		for (int i = 0; i < colores; i++) {
+			btnColor = new JButton("");
+			btnColor.setBounds(distanciaBotonesColor, 23, 30, 30);
+			panelColores.add(btnColor);
+			btnColor.setVisible(false);
+			btnColor.setEnabled(false);
+			btnColoresDisponibles[i] = btnColor;
+			distanciaBotonesColor = distanciaBotonesColor + 40;
 		}
 
+		// Generamos los colores únicos según la dificultad escojida
+
+		if (datosCompartidos.getArrCol().length < colores) {
+			CambioColores cm = new CambioColores(numIntentos, numColores, datosCompartidos);
+			cm.setVisible(true);
+			arrayDificultad = new Color[numColores];
+			setVisible(false);
+		} else {
+			int num = 0;
+			while (numbers.size() < colores) {
+				int randomNumber = (int) Math.round(Math.random() * (datosCompartidos.getArrCol().length - 1));
+				if (!numbers.contains(randomNumber)) {
+					numbers.add(randomNumber);
+					arrayDificultad[num] = arrCol[randomNumber];
+					btnColoresDisponibles[num].setBackground(arrayDificultad[num]);
+					btnColoresDisponibles[num].setVisible(true);
+					num++;
+				}
+			}
+		}
+		generarCombinacionSecreta();
+	}
+
+	public void generarCombinacionSecreta() {
 		// Generaamos los colores escojidos por le ordenador como solucion
 		// (puede contener dos valores iguales)
 		for (int i = 0; i < arraySolucion.length; i++) {
@@ -248,7 +300,6 @@ public class vista extends JFrame {
 			// Asignamos los colores a los botones
 			btnSelecionados[i].setBackground(arraySolucion[i]);
 		}
-
 	}
 
 	// ----------- MOSTRAR LABEL SEGÚN NIVEL ESCOJIDO (color y texto) -----------
@@ -313,7 +364,8 @@ public class vista extends JFrame {
 			switch (input) {
 			case 0:
 				setVisible(false);
-				new DificultdadUsuario();
+				datosCompartidos.setPartidas(datosCompartidos.getPartidas() + 1);
+				new DificultdadUsuario(datosCompartidos);
 				break;
 			}
 		}
