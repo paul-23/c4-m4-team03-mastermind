@@ -35,7 +35,6 @@ import javax.swing.JMenu;
 import java.awt.Toolkit;
 import java.awt.Rectangle;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 public class vista extends JFrame {
 
