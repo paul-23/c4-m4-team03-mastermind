@@ -68,6 +68,7 @@ public class DificultdadUsuario extends JFrame {
 		rdbtnPrincipiante.setBounds(48, 0, 189, 34);
 		panel_1.add(rdbtnPrincipiante);
 		rdbtnPrincipiante.setFont(new Font("Arial", Font.BOLD, 27));
+		rdbtnPrincipiante.setFocusPainted(false);
 
 		rdbtnMedio = new JRadioButton("Medio");
 		rdbtnMedio.setBackground(new Color(215, 242, 255));
@@ -75,6 +76,7 @@ public class DificultdadUsuario extends JFrame {
 		rdbtnMedio.setBounds(48, 37, 189, 34);
 		panel_1.add(rdbtnMedio);
 		rdbtnMedio.setFont(new Font("Arial", Font.BOLD, 27));
+		rdbtnMedio.setFocusPainted(false);
 
 		rdbtnAvanzado = new JRadioButton("Avanzado");
 		rdbtnAvanzado.setBackground(new Color(215, 242, 255));
@@ -82,6 +84,7 @@ public class DificultdadUsuario extends JFrame {
 		rdbtnAvanzado.setBounds(48, 74, 189, 34);
 		panel_1.add(rdbtnAvanzado);
 		rdbtnAvanzado.setFont(new Font("Arial", Font.BOLD, 27));
+		rdbtnAvanzado.setFocusPainted(false);
 
 		bgroup = new ButtonGroup();
 		bgroup.add(rdbtnPrincipiante);
@@ -101,6 +104,7 @@ public class DificultdadUsuario extends JFrame {
 		btnAceptar.setBounds(0, 0, 138, 34);
 		panel.add(btnAceptar);
 		btnAceptar.setFont(new Font("Arial", Font.BOLD, 19));
+		btnAceptar.setFocusPainted(false);
 
 		btnAceptar.addActionListener(accept);
 
@@ -110,6 +114,7 @@ public class DificultdadUsuario extends JFrame {
 		btnCancelar.setBounds(148, 0, 138, 34);
 		panel.add(btnCancelar);
 		btnCancelar.setFont(new Font("Arial", Font.PLAIN, 19));
+		btnCancelar.setFocusPainted(false);
 		
 		JLabel lblNewLabel_1 = new JLabel("MASTERMIND");
 		lblNewLabel_1.setForeground(new Color(0, 102, 153));

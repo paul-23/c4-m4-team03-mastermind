@@ -205,6 +205,7 @@ public class vista extends JFrame {
 		comp.setBackground(new Color(0, 102, 153));
 		comp.setBounds(559, 173, 252, 43);
 		contentPane1.add(comp);
+		comp.setFocusPainted(false);
 
 		setVisible(true);
 		crear(botones, arrayDificultad);
