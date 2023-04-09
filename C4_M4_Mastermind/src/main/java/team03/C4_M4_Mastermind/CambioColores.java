@@ -118,7 +118,7 @@ public class CambioColores extends JFrame {
 				comprobar();
 			} else if (e.getSource() == btnCancelar) {
 				setVisible(false);
-				new vista(coloresDefault.getPartidas(), numColores, coloresDefault);
+				new vista(numIntentos, numColores, coloresDefault);
 			}
 		}
 	};
@@ -137,7 +137,7 @@ public class CambioColores extends JFrame {
 			coloresDefault.setArrCol(arrayColores);
 			comprobacion = true;
 			setVisible(false);
-			new vista(coloresDefault.getPartidas(), numColores, coloresDefault);
+			new vista(numIntentos, numColores, coloresDefault);
 		}
 	}
 
