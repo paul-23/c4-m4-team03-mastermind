@@ -228,11 +228,14 @@ public class vista extends JFrame {
 	
 	ActionListener cambiarColores = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			cm = new CambioColores(intentosVista, numColores, datosCompartidos);
-			cm.setVisible(true);
-			setVisible(false);
+			abrirVentanaCambioColores();
 		}
 	};
+	
+	public void abrirVentanaCambioColores() {
+		cm = new CambioColores(intentosVista, numColores, datosCompartidos, this);
+		cm.setVisible(true);
+	}
 
 	// ----------- GENERAR COLORES POR DEFECTO O ESCOJIDOS -----------
 
@@ -269,7 +272,7 @@ public class vista extends JFrame {
 		// Generamos los colores únicos según la dificultad escojida
 
 		if (datosCompartidos.getArrCol().length < colores) {
-			CambioColores cm = new CambioColores(intentosVista, numColores, datosCompartidos);
+			CambioColores cm = new CambioColores(intentosVista, numColores, datosCompartidos, this);
 			cm.setVisible(true);
 			arrayDificultad = new Color[numColores];
 			setVisible(false);

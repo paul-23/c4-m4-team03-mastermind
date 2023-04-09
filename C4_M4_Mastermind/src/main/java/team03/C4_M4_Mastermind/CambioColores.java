@@ -25,6 +25,7 @@ import javax.swing.JColorChooser;
 public class CambioColores extends JFrame {
 
 	private Colores coloresDefault;
+	private vista vista1;
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,10 +36,11 @@ public class CambioColores extends JFrame {
 	boolean comprobacion = false;
 	int numIntentos, numColores;
 
-	public CambioColores(int intentos, int colores, Colores datosCompartidos) {
+	public CambioColores(int intentos, int colores, Colores datosCompartidos, vista vista) {
 		coloresDefault = datosCompartidos;
 		numIntentos = intentos;
 		numColores = colores;
+		vista1 = vista;
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(CambioColores.class.getResource("/team03/C4_M4_Mastermind/assets/iconoG.png")));
@@ -118,7 +120,6 @@ public class CambioColores extends JFrame {
 				comprobar();
 			} else if (e.getSource() == btnCancelar) {
 				setVisible(false);
-				new vista(numIntentos, numColores, coloresDefault);
 			}
 		}
 	};
@@ -137,6 +138,7 @@ public class CambioColores extends JFrame {
 			coloresDefault.setArrCol(arrayColores);
 			comprobacion = true;
 			setVisible(false);
+			vista1.setVisible(false);
 			new vista(numIntentos, numColores, coloresDefault);
 		}
 	}
