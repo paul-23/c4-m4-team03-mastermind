@@ -41,3 +41,14 @@ Mensaje que se muestra al perder una partida
 Permite al usuario mostrar la solución de la combinación secreta
 
 ![image](https://user-images.githubusercontent.com/62121921/230619791-d65e8cff-d024-4c18-a838-e76444db55ac.png)
+
+### Cambiar colores
+Permite al usuario cambiar los colores a partir de los cuales se va a generar la combinacións secreta.\
+Esta opción esta disponible solo si hemos jugado una partida.
+
+![image](https://user-images.githubusercontent.com/62121921/230773006-e4f099a8-0196-499f-9a3a-d847f3837fc4.png)
+
+Nos permite escoger entre tantos colores tengamos según la dificultad escogida.\
+![image](https://user-images.githubusercontent.com/62121921/230773139-53e77d7c-0cbb-4afe-b055-7c8a3ae4d067.png)
+
+![image](https://user-images.githubusercontent.com/62121921/230773160-abba7e51-40f7-4568-b5d3-e6f17081f094.png)
