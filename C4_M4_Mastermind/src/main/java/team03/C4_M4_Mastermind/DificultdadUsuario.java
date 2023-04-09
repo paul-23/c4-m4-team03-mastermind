@@ -3,6 +3,9 @@ package team03.C4_M4_Mastermind;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import team03.C4_M4_Mastermind.models.Colores;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
@@ -16,6 +19,8 @@ import java.awt.Toolkit;
 import java.awt.Color;
 
 public class DificultdadUsuario extends JFrame {
+	
+	Colores partidas = new Colores();
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -24,11 +29,13 @@ public class DificultdadUsuario extends JFrame {
 	private ButtonGroup bgroup;
 	private JRadioButton rdbtnPrincipiante, rdbtnMedio, rdbtnAvanzado;
 	private JButton btnAceptar, btnCancelar;
+	private Colores datosCompartidos;
 
 	/**
 	 * Create the frame.
 	 */
-	public DificultdadUsuario() {
+	public DificultdadUsuario(Colores datosCompartidosA) {
+		datosCompartidos = datosCompartidosA;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DificultdadUsuario.class.getResource("/team03/C4_M4_Mastermind/assets/iconoG.png")));
 		setTitle("Seleccionar nivel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,6 +120,7 @@ public class DificultdadUsuario extends JFrame {
 
 		btnCancelar.addActionListener(cancelar);
 
+		setResizable(false);
 		setVisible(true);
 		
 	}
@@ -150,7 +158,7 @@ public class DificultdadUsuario extends JFrame {
 				}
 			}
 			
-			new vista(intentos, colores);
+			new vista(intentos, colores, datosCompartidos);
 			setVisible(false);
 		}
 	};
@@ -159,7 +167,7 @@ public class DificultdadUsuario extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			intentos = 10;
 			colores = 4;
-			new vista(intentos, colores);
+			new vista(intentos, colores, datosCompartidos);
 			setVisible(false);
 		}
 	};
