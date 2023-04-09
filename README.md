@@ -52,3 +52,9 @@ Nos permite escoger entre tantos colores tengamos según la dificultad escogida.
 ![image](https://user-images.githubusercontent.com/62121921/230773139-53e77d7c-0cbb-4afe-b055-7c8a3ae4d067.png)
 
 ![image](https://user-images.githubusercontent.com/62121921/230773160-abba7e51-40f7-4568-b5d3-e6f17081f094.png)
+
+Si intentamos inicar una partida con mayor dificultad después de seleccionar los colores,\
+se abrirá una ventana que nos pedirá volver a introducir los colores según la dificultad
+![image](https://user-images.githubusercontent.com/62121921/230773666-a097bc34-f749-4e36-8384-5b0832fd4b96.png)
+
+Si cancelamos en esta ventana se iniciará el juego con los colores seleccionados anteriormente, pero con la difuiltad principiante
